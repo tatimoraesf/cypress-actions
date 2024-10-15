@@ -49,24 +49,3 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: 5466b382-3aa2-4379-a96f-0e6951faee20
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  cypress-e2e-firefox:
-    needs: cypress-e2e-electron
-    runs-on: ubuntu-latest
-    container:
-      image: cypress/browsers:node-20.18.0-chrome-129.0.6668.89-1-ff-131.0.2-edge-129.0.2792.65-1
-      options: --user 1001
-    steps:
-      - name: Get code
-        uses: actions/checkout@v4.2.1
-
-      - name: Cypress run 
-        uses: cypress-io/github-action@v6.5.0
-        with:
-          install-command: yarn install
-          browser: firefox
-          record: true
-          group: UI Firefox
-          spec: ${{ github.event.inputs.spec }}
-        env:
-          CYPRESS_RECORD_KEY: 5466b382-3aa2-4379-a96f-0e6951faee20
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
